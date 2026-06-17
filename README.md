@@ -66,24 +66,3 @@ Além das funcionalidades básicas de cadastro e gerenciamento de livros, o sist
 | JavaScript | Lógica da aplicação |
 | LocalStorage | Persistência dos dados |
 
----
-
-## 📂 Estrutura do Projeto
-
-Biblioteca-Arcanjo
-
-├── index.html
-├── catalogo.html
-├── sobre.html
-│
-├── css/
-│   └── style.css
-│
-├── js/
-│   └── app.js
-│
-├── assets/
-│   ├── imagens/
-│   └── icones/
-│
-└── README.md
