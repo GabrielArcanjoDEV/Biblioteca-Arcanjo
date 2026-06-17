@@ -69,8 +69,9 @@ Além das funcionalidades básicas de cadastro e gerenciamento de livros, o sist
 ---
 
 ## 📂 Estrutura do Projeto
-Biblioteca-Arcanjo/
-│
+
+Biblioteca-Arcanjo
+
 ├── index.html
 ├── catalogo.html
 ├── sobre.html
