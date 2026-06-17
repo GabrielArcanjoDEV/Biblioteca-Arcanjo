@@ -66,3 +66,30 @@ Além das funcionalidades básicas de cadastro e gerenciamento de livros, o sist
 | JavaScript | Lógica da aplicação |
 | LocalStorage | Persistência dos dados |
 
+## 🚀 Como Executar
+
+### Método 1 — Executar Localmente
+
+1. Clone este repositório:
+
+git clone https://github.com/GabrielArcanjoDEV/Biblioteca-Arcanjo.git
+
+2. Acesse a pasta do projeto:
+
+Biblioteca-Arcanjo
+
+
+3. Abra o arquivo index.html em qualquer navegador moderno.
+
+### Método 2 — Download Direto
+
+1. Clique em **Code**.
+2. Selecione **Download ZIP**.
+3. Extraia os arquivos.
+4. Abra o arquivo index.html no navegador.
+
+## 💾 Armazenamento dos Dados
+
+Os dados da biblioteca são armazenados localmente utilizando o **LocalStorage** do navegador.
+
+⚠️ Ao limpar os dados do navegador, os livros cadastrados também serão removidos.
