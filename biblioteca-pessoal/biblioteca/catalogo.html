@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Biblioteca Arcanjo — Catálogo</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <!-- ═══ NAVEGAÇÃO ═══ -->
+    <nav>
+      <div class="nav-container">
+        <a href="index.html" class="nav-logo">
+          📚 Minha <span>Biblioteca</span>
+        </a>
+        <ul class="nav-links">
+          <li><a href="index.html">Início</a></li>
+          <li><a href="catalogo.html">Catálogo</a></li>
+          <li><a href="sobre.html">Sobre</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <main>
+      <!-- ═══ CABEÇALHO DA PÁGINA ═══ -->
+      <div class="catalogo-header">
+        <div class="container">
+          <h1>📖 Meu Catálogo</h1>
+          <p>
+            Gerencie todos os seus livros — adicione, edite e acompanhe sua
+            leitura
+          </p>
+        </div>
+      </div>
+
+      <div class="catalogo-conteudo container">
+        <!-- ═══ FORMULÁRIO DE ADIÇÃO (CREATE) ═══ -->
+        <div class="form-card">
+          <h2>➕ Adicionar Novo Livro</h2>
+          <form id="form-adicionar" novalidate>
+            <div class="form-grid">
+              <div class="form-grupo">
+                <label for="titulo">Título *</label>
+                <input
+                  type="text"
+                  id="titulo"
+                  name="titulo"
+                  placeholder="Ex: Dom Casmurro"
+                  required
+                />
+              </div>
+              <div class="form-grupo">
+                <label for="autor">Autor *</label>
+                <input
+                  type="text"
+                  id="autor"
+                  name="autor"
+                  placeholder="Ex: Machado de Assis"
+                  required
+                />
+              </div>
+              <div class="form-grupo">
+                <label for="genero">Gênero</label>
+                <select id="genero" name="genero">
+                  <option value="Romance">Romance</option>
+                  <option value="Ficção Científica">Ficção Científica</option>
+                  <option value="Fantasia">Fantasia</option>
+                  <option value="Mistério">Mistério</option>
+                  <option value="Terror">Terror</option>
+                  <option value="Biografia">Biografia</option>
+                  <option value="História">História</option>
+                  <option value="Autoajuda">Autoajuda</option>
+                  <option value="Realismo Mágico">Realismo Mágico</option>
+                  <option value="Poesia">Poesia</option>
+                  <option value="Outro">Outro</option>
+                </select>
+              </div>
+              <div class="form-grupo">
+                <label for="ano">Ano de Publicação</label>
+                <input
+                  type="number"
+                  id="ano"
+                  name="ano"
+                  placeholder="Ex: 2020"
+                  min="1000"
+                  max="2099"
+                />
+              </div>
+              <div class="form-grupo">
+                <label for="status">Status de Leitura</label>
+                <select id="status" name="status">
+                  <option value="nao">Não lido</option>
+                  <option value="lendo">Lendo</option>
+                  <option value="lido">Lido</option>
+                </select>
+              </div>
+              <div class="form-grupo"><label>Capa URL</label><input type="text" id="capa" name="capa" placeholder="https://..."></div>
+<div class="form-grupo"><label>Avaliação</label><select id="avaliacao" name="avaliacao"><option value="1">★</option><option value="2">★★</option><option value="3">★★★</option><option value="4">★★★★</option><option value="5" selected>★★★★★</option></select></div>
+<div class="form-grupo span-2">
+                <label for="descricao">Sinopse / Notas pessoais</label>
+                <textarea
+                  id="descricao"
+                  name="descricao"
+                  placeholder="Escreva uma breve descrição ou suas impressões sobre o livro..."
+                ></textarea>
+              </div>
+            </div>
+            <div class="form-acoes">
+              <button type="submit" class="btn btn-primario">
+                📚 Adicionar à Biblioteca
+              </button>
+              <button type="reset" class="btn btn-secundario">🔄 Limpar</button>
+            </div>
+          </form>
+        </div>
+
+        <!-- ═══ LISTA DE LIVROS (READ) ═══ -->
+        <div>
+          <div class="lista-livros-header">
+            <h2 class="secao-titulo" style="margin-bottom: 0">Seus Livros</h2>
+            <span class="contagem-livros" id="contagem-livros">0 livro(s)</span>
+          </div>
+
+          <!-- Filtros e busca -->
+          <div class="controles-busca">
+            <input
+              type="search"
+              class="input-busca"
+              id="busca"
+              placeholder="Buscar por título, autor ou gênero..."
+            />
+            <select class="select-filtro" id="filtro-status">
+              <option value="">Todos os status</option>
+              <option value="nao">Não lidos</option>
+              <option value="lendo">Lendo</option>
+              <option value="lido">Lidos</option>
+            </select><select id="filtro-genero" class="select-filtro"><option value="">Todos gêneros</option></select><select id="ordenacao" class="select-filtro"><option value="">Ordenar</option><option value="autor">Autor</option><option value="ano">Ano</option></select></div>
+
+          <!-- Lista dinâmica de livros -->
+          <div id="lista-livros">
+            <!-- Preenchido dinamicamente pelo JavaScript -->
+          </div>
+
+          <!-- Estado vazio -->
+          <div class="estado-vazio" id="estado-vazio">
+            <span class="icone-vazio">📭</span>
+            <h3>Nenhum livro encontrado</h3>
+            <p>Use o formulário acima para adicionar seu primeiro livro!</p>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- ═══ MODAL DE EDIÇÃO (UPDATE) ═══ -->
+    <div class="overlay-modal" id="overlay-modal">
+      <div class="modal">
+        <div class="modal-header">
+          <h2>✏️ Editar Livro</h2>
+          <button class="btn-fechar-modal" id="btn-fechar-modal" title="Fechar">
+            &times;
+          </button>
+        </div>
+        <form id="form-edicao" novalidate>
+          <div class="form-grid">
+            <div class="form-grupo">
+              <label for="edit-titulo">Título *</label>
+              <input type="text" id="edit-titulo" required />
+            </div>
+            <div class="form-grupo">
+              <label for="edit-autor">Autor *</label>
+              <input type="text" id="edit-autor" required />
+            </div>
+            <div class="form-grupo">
+              <label for="edit-genero">Gênero</label>
+              <select id="edit-genero">
+                <option value="Romance">Romance</option>
+                <option value="Ficção Científica">Ficção Científica</option>
+                <option value="Fantasia">Fantasia</option>
+                <option value="Mistério">Mistério</option>
+                <option value="Terror">Terror</option>
+                <option value="Biografia">Biografia</option>
+                <option value="História">História</option>
+                <option value="Autoajuda">Autoajuda</option>
+                <option value="Realismo Mágico">Realismo Mágico</option>
+                <option value="Poesia">Poesia</option>
+                <option value="Outro">Outro</option>
+              </select>
+            </div>
+            <div class="form-grupo">
+              <label for="edit-ano">Ano</label>
+              <input type="number" id="edit-ano" min="1000" max="2099" />
+            </div>
+            <div class="form-grupo">
+              <label for="edit-status">Status</label>
+              <select id="edit-status">
+                <option value="nao">Não lido</option>
+                <option value="lendo">Lendo</option>
+                <option value="lido">Lido</option>
+              </select>
+            </div>
+            <div class="form-grupo"><label>Capa URL</label><input type="text" id="capa" name="capa" placeholder="https://..."></div>
+<div class="form-grupo"><label>Avaliação</label><select id="avaliacao" name="avaliacao"><option value="1">★</option><option value="2">★★</option><option value="3">★★★</option><option value="4">★★★★</option><option value="5" selected>★★★★★</option></select></div>
+<div class="form-grupo span-2">
+              <label for="edit-descricao">Sinopse / Notas</label>
+              <textarea id="edit-descricao"></textarea>
+            </div>
+          </div>
+          <div class="form-acoes" style="margin-top: 1rem">
+            <button type="submit" class="btn btn-primario">
+              💾 Salvar Alterações
+            </button>
+            <button
+              type="button"
+              class="btn btn-secundario"
+              onclick="fecharModal()"
+            >
+              Cancelar
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- ═══ RODAPÉ ═══ -->
+    <footer>
+      <div class="footer-container">
+        <div class="footer-section">
+          <h4>📚 Biblioteca Arcanjo</h4>
+          <p>
+            Um projeto simples para organizar sua vida literária. Gerencie seus
+            livros com praticidade e estilo.
+          </p>
+        </div>
+        <div class="footer-section">
+          <h4>Links Úteis</h4>
+          <ul class="footer-links">
+            <li>
+              <a href="https://www.goodreads.com" target="_blank" rel="noopener"
+                >Goodreads</a
+              >
+            </li>
+            <li>
+              <a href="https://openlibrary.org" target="_blank" rel="noopener"
+                >Open Library</a
+              >
+            </li>
+            <li>
+              <a href="https://www.skoob.com.br" target="_blank" rel="noopener"
+                >Skoob</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://www.livrariacultura.com.br"
+                target="_blank"
+                rel="noopener"
+                >Livraria Cultura</a
+              >
+            </li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Literatura Online</h4>
+          <ul class="footer-links">
+            <li>
+              <a href="https://www.dominio.pub" target="_blank" rel="noopener"
+                >Domínio Público</a
+              >
+            </li>
+            <li>
+              <a href="https://www.gutenberg.org" target="_blank" rel="noopener"
+                >Project Gutenberg</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://bibliotecadigital.org.br"
+                target="_blank"
+                rel="noopener"
+                >Biblioteca Digital</a
+              >
+            </li>
+            <li>
+              <a href="https://www.fnlij.org.br" target="_blank" rel="noopener"
+                >FNLIJ</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>
+          &copy; 2025 Biblioteca Arcanjo Pessoal. Desenvolvido com HTML, CSS e
+          JavaScript puro.
+        </p>
+      </div>
+    <p>Desenvolvido por Gabriel Arcanjo</p></footer>
+
+    <script src="js/app.js"></script>
+  </body>
+</html>
