@@ -1,11 +1,8 @@
-// ── Chave do LocalStorage ──────────────────
 const STORAGE_KEY = "biblioteca_livros";
 
-// ── Estado da aplicação ────────────────────
 let livros = [];
 let livroEditandoId = null;
 
-// ── Utilitários ────────────────────────────
 function gerarId() {
   return "livro_" + Date.now() + "_" + Math.random().toString(36).slice(2, 7);
 }
@@ -19,7 +16,7 @@ function carregarDoStorage() {
   if (dados) {
     livros = JSON.parse(dados);
   } else {
-    // Dados iniciais de exemplo
+
     livros = [
       {
         id: gerarId(),
@@ -59,7 +56,6 @@ function carregarDoStorage() {
   }
 }
 
-// ── Emojis por gênero ──────────────────────
 function emojiPorGenero(genero) {
   const mapa = {
     Romance: "💌",
@@ -77,7 +73,6 @@ function emojiPorGenero(genero) {
   return mapa[genero] || "📚";
 }
 
-// ── Renderizar lista de livros ──────────────
 function renderizarLivros(filtro) {
   const lista = document.getElementById("lista-livros");
   const vazio = document.getElementById("estado-vazio");
@@ -97,12 +92,10 @@ function renderizarLivros(filtro) {
     );
   }
 
-  // Atualizar contagem
   if (contagem) {
     contagem.textContent = livrosFiltrados.length + " livro(s) encontrado(s)";
   }
 
-  // Limpar lista
   lista.innerHTML = "";
 
   if (livrosFiltrados.length === 0) {
